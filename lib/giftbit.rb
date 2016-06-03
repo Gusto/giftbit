@@ -30,6 +30,10 @@ class Giftbit
       get ''
     end
 
+    def funds
+      get 'funds'
+    end
+
     def marketplace(params = {})
       get 'marketplace', params: params
     end
@@ -46,18 +50,15 @@ class Giftbit
       get 'marketplace/categories', params: params
     end
 
-    def campaign(params = {})
-      get 'campaign', params: params
+    def campaign(campaign_id)
+      get "campaign/#{campaign_id}"
     end
 
     def gifts(params = {})
       get 'gifts', params: params
     end
 
-    def create_gift(body = {})
-      body[:expiry] ||= (Date.today + 365).to_s
-      body[:quote] = body[:quote] != false
-
+    def create_campaign(body = {})
       post 'campaign', body: body
     end
 
